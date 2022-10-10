@@ -67,7 +67,7 @@ module.exports = async (ctx, inputFile, toStickerSet = false) => {
 
   if (!ctx.session.userInfo) ctx.session.userInfo = await ctx.db.User.getData(ctx.from)
 
-  const nameSuffix = `_by_${ctx.options.username}`
+  const nameSuffix = ``
   const titleSuffix = ` :: @${ctx.options.username}`
 
   const defaultStickerSet = {
