@@ -67,13 +67,13 @@ module.exports = async (ctx, inputFile, toStickerSet = false) => {
 
   if (!ctx.session.userInfo) ctx.session.userInfo = await ctx.db.User.getData(ctx.from)
 
-  const nameSuffix = ``
+  const nameSuffix = `_by_${ctx.options.username}`
   const titleSuffix = ` :: @${ctx.options.username}`
 
   const defaultStickerSet = {
     owner: ctx.session.userInfo.id,
     name: `f_${Math.random().toString(36).substring(5)}_${ctx.from.id}`,
-    title: 'Favorite stickers',
+    title: 'Awesome stickers',
     emojiSuffix: '🌟'
   }
 
