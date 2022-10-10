@@ -209,7 +209,7 @@ db.connection.once('open', async () => {
       webhook: {
         domain: process.env.BOT_DOMAIN,
         hookPath: `/fStikBot:${process.env.BOT_TOKEN}`,
-        port: process.env.WEBHOOK_PORT || 8080
+        port: process.env.WEBHOOK_PORT || 2500
       }
     }).then(() => {
       console.log('bot start webhook')
