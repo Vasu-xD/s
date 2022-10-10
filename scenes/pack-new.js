@@ -110,7 +110,7 @@ newPackConfirm.enter(async (ctx, next) => {
   const inline = !!ctx.session.scene?.newPack?.inline
   ctx.session.scene.newPack.name = ctx.message.text
 
-  const nameSuffix = `_by_${ctx.options.username}`
+  const nameSuffix = ``
   const titleSuffix = ` :: @${ctx.options.username}`
 
   let { name, title, animated, video } = ctx.session.scene.newPack
