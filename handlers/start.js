@@ -1,28 +1,7 @@
 const Markup = require('telegraf/markup')
 const { userName } = require('../utils')
 
-module.exports = async (ctx) => {
-  const commands = [
-    { command: 'start', description: ctx.i18n.t('cmd.start.commands.start') },
-    { command: 'packs', description: ctx.i18n.t('cmd.start.commands.packs') },
-    { command: 'new', description: ctx.i18n.t('cmd.start.commands.new') },
-    { command: 'catalog', description: ctx.i18n.t('cmd.start.commands.catalog') },
-    { command: 'publish', description: ctx.i18n.t('cmd.start.commands.publish') },
-    { command: 'original', description: ctx.i18n.t('cmd.start.commands.original') },
-    { command: 'restore', description: ctx.i18n.t('cmd.start.commands.restore') },
-    { command: 'copy', description: ctx.i18n.t('cmd.start.commands.copy') },
-    // { command: 'emoji', description: ctx.i18n.t('cmd.start.commands.emoji') },
-    { command: 'lang', description: ctx.i18n.t('cmd.start.commands.lang') },
-    { command: 'donate', description: ctx.i18n.t('cmd.start.commands.donate') }
-  ]
 
-  await ctx.telegram.callApi('setMyCommands', {
-    commands: JSON.stringify(commands),
-    scope: JSON.stringify({
-      type: 'chat',
-      chat_id: ctx.chat.id
-    })
-  })
 
   await ctx.replyWithHTML(ctx.i18n.t('cmd.start.info', {
     name: userName(ctx.from)
