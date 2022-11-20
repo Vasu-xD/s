@@ -42,6 +42,14 @@ const bot = new Telegraf(process.env.BOT_TOKEN, {
   handlerTimeout: 1
 })
 
+bot.use((ctx, next) => {
+  next().catch((error) => {
+    handleError(error, ctx)
+    return true
+  })
+  return true
+})
+
 bot.on(['channel_post', 'edited_channel_post', 'poll'], () => {})
 
 // I18n
@@ -60,8 +68,6 @@ bot.use(rateLimit({
   limit: 3,
   onLimitExceeded: (ctx) => ctx.reply(ctx.i18n.t('ratelimit'))
 }))
-
-bot.catch(handleError)
 
 const limitPublicPack = Composer.optional((ctx) => {
   return ctx.session?.userInfo?.stickerSet?.passcode === 'public'
@@ -93,14 +99,14 @@ bot.use(
       } else if (ctx.from && ctx.chat) {
         return `${ctx.from.id}:${ctx.chat.id}`
       }
-      return null
+      return ctx.update.update_id
     }
   })
 )
 
 // response time logger
 bot.use(async (ctx, next) => {
-  if (!ctx.session.chainActions) ctx.session.chainActions = []
+  if (ctx.session && !ctx.session.chainActions) ctx.session.chainActions = []
   let action
 
   if (ctx.message && ctx.message.text) action = ctx.message.text
